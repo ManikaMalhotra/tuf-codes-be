@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14.1-alpine
+    environment:
+      - POSTGRES_USER=tuf-codes
+      - POSTGRES_PASSWORD=tuf-codes
+      - POSTGRES_DB=tuf-codes
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+  cache:
+    image: redis:7.0.3
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+
+volumes:
+  db:
+    driver: local
